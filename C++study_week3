@@ -1,13 +1,17 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
 using namespace std;
+
+// 포인터 함수를 사용하여 총 금액을 누적하는 함수
+void total(int* sum, int amount) {
+    *sum += amount;  // 포인터를 통해 누적 금액 갱신
+}
 
 int main() {
     string menu[] = { "액션 DVD", "코미디 DVD", "드라마 DVD", "SF DVD", "애니메이션 DVD" };
     int prices[] = { 12000, 15000, 11000, 17000, 13000 };
     int numTypes = 5;
-    int total = 0;
+    int totalAmount = 0;  // 총 금액을 저장할 변수
 
     while (true) {
         //1. 초기 화면 출력
@@ -23,7 +27,7 @@ int main() {
         cin >> choice;
 
         if (choice == 0) {
-            cout << "총 금액은 " << total << "원 입니다." << endl;
+            cout << "총 금액은 " << totalAmount << "원 입니다." << endl;
             cout << "프로그램을 종료합니다." << endl;
             break;
         }
@@ -46,11 +50,10 @@ int main() {
             cin >> quantity;
 
             int subtotal = prices[index] * quantity;
-            total += subtotal;
+            total(&totalAmount, subtotal);  // 포인터 함수를 사용하여 총액 갱신
 
             cout << endl << menu[index] << " " << quantity << "개를 구매하셨습니다." << endl;
             cout << "가격은 " << subtotal << "원 입니다." << endl << endl;
-
         }
         else {
             cout << "메인 메뉴로 돌아갑니다." << endl << endl;
